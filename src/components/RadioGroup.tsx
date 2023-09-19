@@ -16,7 +16,7 @@ interface Props<T extends RadioProps> {
   groupName: string;
 }
 
-export default function RadioGroup<T extends RadioProps>({
+export default function AppRadioGroup<T extends RadioProps>({
   label,
   values,
   description,
