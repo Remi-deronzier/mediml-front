@@ -1,7 +1,7 @@
+import useFormErrorMessage from "@hooks/useFormErrorMessage";
 import { cva } from "class-variance-authority";
 import { ComponentProps } from "react";
 import { FieldValues, useFormContext } from "react-hook-form";
-import useFormErrorMessage from "../hooks/useFormErrorMessage";
 import AppInputError from "./InputError";
 
 interface Props<T extends FieldValues> extends ComponentProps<"input"> {
