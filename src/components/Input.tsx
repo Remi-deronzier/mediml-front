@@ -25,7 +25,7 @@ const inputStyles = cva(
   }
 );
 
-export default function Input<T extends FieldValues>({
+export default function AppInput<T extends FieldValues>({
   label,
   placeholder,
   type,
