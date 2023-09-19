@@ -1,10 +1,15 @@
-interface RadioProps {
+import { useFormContext } from "react-hook-form";
+import useFormErrorMessage from "../hooks/useFormErrorMessage";
+import AppInputError from "./InputError";
+
+export interface RadioProps {
   id: string;
   title: string;
 }
 
 interface Props<T extends RadioProps> {
   label: string;
+  showErrorMessage?: boolean;
   description?: string;
   values: T[];
   defaultValue: T;
@@ -17,7 +22,11 @@ export default function RadioGroup<T extends RadioProps>({
   description,
   defaultValue,
   groupName,
+  showErrorMessage = true,
 }: Props<T>) {
+  const { register } = useFormContext();
+  const maybeErrorMessage = useFormErrorMessage(groupName);
+
   return (
     <div>
       <label className="text-base font-semibold text-gray-900">{label}</label>
@@ -29,7 +38,10 @@ export default function RadioGroup<T extends RadioProps>({
             <div key={value.id} className="flex items-center">
               <input
                 id={value.id}
-                name={groupName}
+                // register overrides the ref and the name.
+                // That's why we don't need to pass them.
+                {...register(groupName)}
+                value={value.id}
                 type="radio"
                 defaultChecked={value.id === defaultValue.id}
                 className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
@@ -43,6 +55,9 @@ export default function RadioGroup<T extends RadioProps>({
             </div>
           ))}
         </div>
+        {showErrorMessage && maybeErrorMessage && (
+          <AppInputError message={maybeErrorMessage} />
+        )}
       </fieldset>
     </div>
   );
