@@ -1,10 +1,13 @@
-import useFormErrorMessage from "@hooks/useFormErrorMessage";
-import { cva } from "class-variance-authority";
-import { ComponentProps } from "react";
-import { FieldValues, useFormContext } from "react-hook-form";
-import AppInputError from "./InputError";
+import { ComponentProps } from 'react';
+import { FieldValues, useFormContext } from 'react-hook-form';
 
-interface Props<T extends FieldValues> extends ComponentProps<"input"> {
+import { cva } from 'class-variance-authority';
+
+import useFormErrorMessage from '@hooks/useFormErrorMessage';
+
+import AppInputError from './InputError';
+
+interface Props<T extends FieldValues> extends ComponentProps<'input'> {
   label: string;
   placeholder?: string;
   type?: string;
@@ -13,13 +16,13 @@ interface Props<T extends FieldValues> extends ComponentProps<"input"> {
 }
 
 const inputStyles = cva(
-  "block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200 sm:text-sm sm:leading-6",
+  'block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200 sm:text-sm sm:leading-6',
   {
     variants: {
       shouldShowError: {
-        true: "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500",
+        true: 'text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500',
         false:
-          "text-gray-900 ring-gray-300 placeholder:text-gray-400  focus:ring-indigo-600",
+          'text-gray-900 ring-gray-300 placeholder:text-gray-400  focus:ring-indigo-600',
       },
     },
   }
@@ -54,7 +57,7 @@ export default function AppInput<T extends FieldValues>({
           id={commonName}
           className={inputStyles({
             shouldShowError:
-              maybeErrorMessage !== undefined && maybeErrorMessage !== "",
+              maybeErrorMessage !== undefined && maybeErrorMessage !== '',
           })}
           placeholder={placeholder}
           {...props}

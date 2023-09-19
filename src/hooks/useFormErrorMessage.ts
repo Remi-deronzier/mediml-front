@@ -1,4 +1,4 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext } from 'react-hook-form';
 
 const useFormErrorMessage = (fieldName: string): string | undefined => {
   const {
@@ -9,7 +9,7 @@ const useFormErrorMessage = (fieldName: string): string | undefined => {
 
   const maybeMessage = error?.message;
 
-  const shouldShowError = typeof maybeMessage === "string";
+  const shouldShowError = typeof maybeMessage === 'string';
 
   return shouldShowError ? maybeMessage : undefined;
 };

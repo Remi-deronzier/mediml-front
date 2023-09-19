@@ -1,13 +1,13 @@
-import { ComponentProps } from "react";
+import { ComponentProps } from 'react';
 import {
   FieldValues,
   FormProvider,
   SubmitHandler,
   UseFormReturn,
-} from "react-hook-form";
+} from 'react-hook-form';
 
 interface Props<T extends FieldValues>
-  extends Omit<ComponentProps<"form">, "onSubmit"> {
+  extends Omit<ComponentProps<'form'>, 'onSubmit'> {
   form: UseFormReturn<T>;
   onSubmit?: SubmitHandler<T>;
   fieldsetClassName?: string;
@@ -17,7 +17,7 @@ export default function AppForm<T extends FieldValues>({
   form,
   onSubmit,
   children,
-  fieldsetClassName = "",
+  fieldsetClassName = '',
   ...props
 }: Props<T>) {
   return (

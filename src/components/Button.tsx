@@ -1,7 +1,8 @@
-import { ComponentProps } from "react";
+import { ComponentProps } from 'react';
 
-import { VariantProps, cva } from "class-variance-authority";
-import Loader from "./Loader";
+import { VariantProps, cva } from 'class-variance-authority';
+
+import Loader from './Loader';
 
 interface ButtonProps {
   label: string;
@@ -9,36 +10,36 @@ interface ButtonProps {
 
 interface Props
   extends ButtonProps,
-    ComponentProps<"button">,
+    ComponentProps<'button'>,
     VariantProps<typeof buttonOrLinkStyles> {}
 
 const buttonOrLinkStyles = cva(
-  "rounded-md px-3 py-2 text-sm font-semibold shadow-sm transition-all bg-indigo-600 text-white transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
+  'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
   {
     variants: {
       isFullWidth: {
-        true: "w-full",
+        true: 'w-full',
       },
       isLoading: {
-        true: "cursor-progress",
+        true: 'cursor-progress',
       },
       isDisabled: {
-        true: "cursor-not-allowed",
+        true: 'cursor-not-allowed',
       },
     },
     compoundVariants: [
       {
         isLoading: true,
-        class: "",
+        class: '',
       },
       {
         isLoading: false,
         isDisabled: false,
-        class: "hover:bg-indigo-500",
+        class: 'hover:bg-indigo-500',
       },
       {
         isDisabled: true,
-        class: "bg-primary-disabled",
+        class: 'bg-primary-disabled',
       },
     ],
     defaultVariants: {
