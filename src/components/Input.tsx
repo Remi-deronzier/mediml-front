@@ -1,19 +1,42 @@
+import { cva } from "class-variance-authority";
 import { ComponentProps } from "react";
+import { FieldValues, useFormContext } from "react-hook-form";
+import useFormErrorMessage from "../hooks/useFormErrorMessage";
+import AppInputError from "./InputError";
 
-interface Props extends ComponentProps<"input"> {
+interface Props<T extends FieldValues> extends ComponentProps<"input"> {
   label: string;
   placeholder?: string;
   type?: string;
-  commonName: string;
+  commonName: Extract<keyof T, string>;
+  showErrorMessage?: boolean;
 }
 
-export default function Input({
+const inputStyles = cva(
+  "block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200 sm:text-sm sm:leading-6",
+  {
+    variants: {
+      shouldShowError: {
+        true: "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500",
+        false:
+          "text-gray-900 ring-gray-300 placeholder:text-gray-400  focus:ring-indigo-600",
+      },
+    },
+  }
+);
+
+export default function Input<T extends FieldValues>({
   label,
   placeholder,
   type,
   commonName,
+  showErrorMessage = true,
   ...props
-}: Props) {
+}: Props<T>) {
+  const { register } = useFormContext();
+
+  const maybeErrorMessage = useFormErrorMessage(commonName);
+
   return (
     <div>
       <label
@@ -25,12 +48,20 @@ export default function Input({
       <div className="mt-2">
         <input
           type={type}
-          name={commonName}
+          // register overrides the ref and the name.
+          // That's why we don't need to pass them.
+          {...register(commonName)}
           id={commonName}
-          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          className={inputStyles({
+            shouldShowError:
+              maybeErrorMessage !== undefined && maybeErrorMessage !== "",
+          })}
           placeholder={placeholder}
           {...props}
         />
+        {showErrorMessage && maybeErrorMessage && (
+          <AppInputError message={maybeErrorMessage} />
+        )}
       </div>
     </div>
   );
