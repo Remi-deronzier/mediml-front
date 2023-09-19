@@ -1,0 +1,165 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "FastAPI", "version": "0.1.0" },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Index",
+        "operationId": "index__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object", "title": "Response Index  Get" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/predict": {
+      "post": {
+        "summary": "Predict",
+        "operationId": "predict_predict_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PatientsDto" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StrokePredictionsDto"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Gender": {
+        "type": "string",
+        "enum": ["Male", "Female", "Other"],
+        "title": "Gender"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "PatientDto": {
+        "properties": {
+          "gender": { "$ref": "#/components/schemas/Gender" },
+          "age": { "type": "integer", "title": "Age" },
+          "hypertension": { "type": "boolean", "title": "Hypertension" },
+          "heart_disease": { "type": "boolean", "title": "Heart Disease" },
+          "ever_married": { "type": "boolean", "title": "Ever Married" },
+          "work_type": { "$ref": "#/components/schemas/WorkType" },
+          "residence_type": { "$ref": "#/components/schemas/ResidenceType" },
+          "avg_glucose_level": {
+            "type": "number",
+            "title": "Avg Glucose Level"
+          },
+          "bmi": { "type": "number", "title": "Bmi" },
+          "smoking_status": { "$ref": "#/components/schemas/SmokingStatus" }
+        },
+        "type": "object",
+        "required": [
+          "gender",
+          "age",
+          "hypertension",
+          "heart_disease",
+          "ever_married",
+          "work_type",
+          "residence_type",
+          "avg_glucose_level",
+          "bmi",
+          "smoking_status"
+        ],
+        "title": "PatientDto"
+      },
+      "PatientsDto": {
+        "properties": {
+          "patients": {
+            "items": { "$ref": "#/components/schemas/PatientDto" },
+            "type": "array",
+            "title": "Patients"
+          }
+        },
+        "type": "object",
+        "required": ["patients"],
+        "title": "PatientsDto"
+      },
+      "ResidenceType": {
+        "type": "string",
+        "enum": ["Rural", "Urban"],
+        "title": "ResidenceType"
+      },
+      "SmokingStatus": {
+        "type": "string",
+        "enum": ["formerly smoked", "never smoked", "smokes", "Unknown"],
+        "title": "SmokingStatus"
+      },
+      "StrokePrediction": {
+        "type": "string",
+        "enum": ["stroke", "no_stroke"],
+        "title": "StrokePrediction"
+      },
+      "StrokePredictionsDto": {
+        "properties": {
+          "predictions": {
+            "items": { "$ref": "#/components/schemas/StrokePrediction" },
+            "type": "array",
+            "title": "Predictions"
+          }
+        },
+        "type": "object",
+        "required": ["predictions"],
+        "title": "StrokePredictionsDto"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      },
+      "WorkType": {
+        "type": "string",
+        "enum": ["children", "Govt_jov", "Never_worked"],
+        "title": "WorkType"
+      }
+    }
+  }
+}
