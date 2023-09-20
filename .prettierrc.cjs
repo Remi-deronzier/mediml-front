@@ -17,6 +17,7 @@ module.exports = {
     '^@api/(.*)$',
     '^@hooks/(.*)$',
     '^@components/(.*)$',
+    '^@utils/(.*)$',
     '@/(.*)',
     '^[./]',
   ],
