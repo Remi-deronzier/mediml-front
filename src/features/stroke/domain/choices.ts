@@ -1,28 +1,53 @@
+import {
+  Gender,
+  ResidenceType,
+  SmokingStatus,
+  WorkType,
+} from '@api/stroke-api';
+
 import { RadioProps } from '../../../components/RadioGroup';
 
-export interface RadioChoice extends RadioProps {
+export interface GenericChoice extends RadioProps {
   isDefault?: boolean;
 }
+export interface GenderChoice extends GenericChoice {
+  apiValue: Gender;
+}
+export interface YesNoChoice extends GenericChoice {}
+export interface WorkTypeChoice extends GenericChoice {
+  apiValue: WorkType;
+}
+export interface ResidenceTypeChoice extends GenericChoice {
+  apiValue: ResidenceType;
+}
+export interface SmokingStatusChoice extends GenericChoice {
+  apiValue: SmokingStatus;
+}
 
-export const genderChoices: RadioChoice[] = [
+export const genderChoices: GenderChoice[] = [
   {
     id: 'male',
     title: 'Male',
+    apiValue: Gender.Male,
     isDefault: true,
   },
   {
     id: 'female',
     title: 'Female',
+    apiValue: Gender.Female,
   },
   {
     id: 'other',
     title: 'Other',
+    apiValue: Gender.Other,
   },
 ];
 
-const yesNoChoices: RadioChoice[] = [
+export const YES_ID = 'yes';
+
+const yesNoChoices: YesNoChoice[] = [
   {
-    id: 'yes',
+    id: YES_ID,
     title: 'Yes',
     isDefault: true,
   },
@@ -35,61 +60,69 @@ const yesNoChoices: RadioChoice[] = [
 const buildYesNoRadioChoices = (groupName: string) =>
   yesNoChoices.map((choice) => ({
     ...choice,
-    id: `${groupName}-${choice.id}`,
+    id: `${choice.id}-${groupName}`,
   }));
 
-export const heartDiseaseChoices: RadioChoice[] =
+export const heartDiseaseChoices: YesNoChoice[] =
   buildYesNoRadioChoices('heart-disease');
-export const hypertensionChoices: RadioChoice[] =
+export const hypertensionChoices: YesNoChoice[] =
   buildYesNoRadioChoices('hypertension');
-export const everMarriedChoices: RadioChoice[] =
+export const everMarriedChoices: YesNoChoice[] =
   buildYesNoRadioChoices('ever-married');
 
-export const workTypeChoices: RadioChoice[] = [
+export const workTypeChoices: WorkTypeChoice[] = [
   {
     id: 'govt-job',
     title: 'Government job',
     isDefault: true,
+    apiValue: WorkType.Govt_jov,
   },
   {
     id: 'children',
     title: 'Children',
+    apiValue: WorkType.children,
   },
   {
     id: 'never-worked',
     title: 'Never worked',
+    apiValue: WorkType.Never_worked,
   },
 ];
 
-export const residenceTypeChoices: RadioChoice[] = [
+export const residenceTypeChoices: ResidenceTypeChoice[] = [
   {
     id: 'rural',
     title: 'Rural',
     isDefault: true,
+    apiValue: ResidenceType.Rural,
   },
   {
     id: 'urban',
     title: 'Urban',
+    apiValue: ResidenceType.Urban,
   },
 ];
 
-export const smokingStatusChoices: RadioChoice[] = [
+export const smokingStatusChoices: SmokingStatusChoice[] = [
   {
     id: 'formerly-smoked',
     title: 'Formerly smoked',
     isDefault: true,
+    apiValue: SmokingStatus.formerly_smoked,
   },
   {
     id: 'never-smoked',
-
     title: 'Never smoked',
+    apiValue: SmokingStatus.never_smoked,
   },
   {
     id: 'smokes',
     title: 'Smokes',
+    apiValue: SmokingStatus.smokes,
   },
   {
     id: 'unknown',
     title: 'Unknown',
+    apiValue: SmokingStatus.Unknown,
   },
 ];

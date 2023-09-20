@@ -1,4 +1,4 @@
-import { RadioChoice } from '@features/stroke/domain/choices';
+import { GenericChoice } from '@features/stroke/domain/choices';
 import { StrokeSchemaType } from '@features/stroke/domain/stroke-form-validation';
 
 import AppRadioGroup from '@components/RadioGroup';
@@ -7,7 +7,7 @@ interface Props {
   groupName: Extract<keyof StrokeSchemaType, string>;
   label: string;
   description: string;
-  values: RadioChoice[];
+  values: GenericChoice[];
 }
 
 export default function StrokeRadioGroup({
@@ -17,7 +17,7 @@ export default function StrokeRadioGroup({
   description,
 }: Props) {
   return (
-    <AppRadioGroup<RadioChoice, StrokeSchemaType>
+    <AppRadioGroup<GenericChoice, StrokeSchemaType>
       label={label}
       description={description}
       values={values}

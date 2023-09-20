@@ -6,7 +6,7 @@ import {
 } from '@utils/helpers';
 
 import {
-  RadioChoice,
+  GenericChoice,
   everMarriedChoices,
   genderChoices,
   heartDiseaseChoices,
@@ -19,23 +19,23 @@ import {
 const NON_FLOAT_ERROR_MESSAGE = 'Please enter a positive number';
 const FIELD_REQUIRED_ERROR_MESSAGE = 'This field is required';
 
-const buildGenericRadioGroupValidation = (choices: RadioChoice[]) =>
+const buildRadioGroupValidation = (choices: GenericChoice[]) =>
   string().refine((choice) =>
     choices.map((choice) => choice.id).includes(choice)
   );
 
 export const StrokeFormSchema = object({
-  gender: buildGenericRadioGroupValidation(genderChoices),
+  gender: buildRadioGroupValidation(genderChoices),
   age: string()
     .nonempty(FIELD_REQUIRED_ERROR_MESSAGE)
     .regex(regexForOnlyPositiveInteger, {
       message: 'Please enter a positive integer',
     }),
-  hypertension: buildGenericRadioGroupValidation(hypertensionChoices),
-  heartDisease: buildGenericRadioGroupValidation(heartDiseaseChoices),
-  everMarried: buildGenericRadioGroupValidation(everMarriedChoices),
-  workType: buildGenericRadioGroupValidation(workTypeChoices),
-  residenceType: buildGenericRadioGroupValidation(residenceTypeChoices),
+  hypertension: buildRadioGroupValidation(hypertensionChoices),
+  heartDisease: buildRadioGroupValidation(heartDiseaseChoices),
+  everMarried: buildRadioGroupValidation(everMarriedChoices),
+  workType: buildRadioGroupValidation(workTypeChoices),
+  residenceType: buildRadioGroupValidation(residenceTypeChoices),
   avgGlucoseLevel: string()
     .nonempty(FIELD_REQUIRED_ERROR_MESSAGE)
     .regex(regexForOnlyPositiveFloat, {
@@ -46,7 +46,7 @@ export const StrokeFormSchema = object({
     .regex(regexForOnlyPositiveFloat, {
       message: NON_FLOAT_ERROR_MESSAGE,
     }),
-  smokingStatus: buildGenericRadioGroupValidation(smokingStatusChoices),
+  smokingStatus: buildRadioGroupValidation(smokingStatusChoices),
 });
 
 export type StrokeSchemaType = z.infer<typeof StrokeFormSchema>;
