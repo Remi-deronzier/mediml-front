@@ -39,6 +39,7 @@ export default function StrokeView() {
         placeholder="42"
         type="number"
         step={1}
+        isMandatory
       />
       <StrokeRadioGroup
         description="Does the patient have hypertension?"
@@ -75,12 +76,14 @@ export default function StrokeView() {
         commonName="avgGlucoseLevel"
         placeholder="42.42"
         type="number"
+        isMandatory
       />
       <AppInput<StrokeSchemaType>
         label="BMI"
         commonName="bmi"
         placeholder="42.42"
         type="number"
+        isMandatory
       />
       <StrokeRadioGroup
         description="Does the patient smoke?"

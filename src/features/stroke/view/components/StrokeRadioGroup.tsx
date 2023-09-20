@@ -25,6 +25,7 @@ export default function StrokeRadioGroup({
         values.find((choice) => choice.isDefault === true) ?? values[0]
       }
       groupName={groupName}
+      isMandatory
     />
   );
 }
