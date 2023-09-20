@@ -1,4 +1,4 @@
-import { useFormContext } from 'react-hook-form';
+import { FieldValues, useFormContext } from 'react-hook-form';
 
 import useFormErrorMessage from '@hooks/useFormErrorMessage';
 
@@ -9,23 +9,26 @@ export interface RadioProps {
   title: string;
 }
 
-interface Props<T extends RadioProps> {
+interface Props<T extends RadioProps, U extends FieldValues> {
   label: string;
   showErrorMessage?: boolean;
   description?: string;
   values: T[];
   defaultValue: T;
-  groupName: string;
+  groupName: Extract<keyof U, string>;
 }
 
-export default function AppRadioGroup<T extends RadioProps>({
+export default function AppRadioGroup<
+  T extends RadioProps,
+  U extends FieldValues,
+>({
   label,
   values,
   description,
   defaultValue,
   groupName,
   showErrorMessage = true,
-}: Props<T>) {
+}: Props<T, U>) {
   const { register } = useFormContext();
   const maybeErrorMessage = useFormErrorMessage(groupName);
 
