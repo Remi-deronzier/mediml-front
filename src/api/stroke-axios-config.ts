@@ -1,7 +1,7 @@
 import Axios, { AxiosRequestConfig } from 'axios';
 
 export const AXIOS_INSTANCE = Axios.create({
-  baseURL: 'https://mediml-api-3gjfkxgxcq-od.a.run.app',
+  baseURL: 'https://api.mediml.remax21.fr',
 });
 
 export const strokeApiInstance = <T>(
