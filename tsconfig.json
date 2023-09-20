@@ -25,7 +25,8 @@
       "@hooks/*": ["./src/hooks/*"],
       "@utils/*": ["./src/utils/*"],
       "@features/*": ["./src/features/*"],
-      "@app/*": ["./src/app/*"]
+      "@app/*": ["./src/app/*"],
+      "@assets/*": ["./src/assets/*"]
     }
   },
   "include": ["src"],

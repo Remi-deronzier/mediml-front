@@ -24,6 +24,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.46.1",
     "react-spinners": "^0.13.8",
+    "vite-plugin-svgr": "^4.0.0",
     "vite-tsconfig-paths": "^4.2.1",
     "zod": "^3.22.2"
   },

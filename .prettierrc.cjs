@@ -18,6 +18,7 @@ module.exports = {
     '^@features/(.*)$',
     '^@hooks/(.*)$',
     '^@components/(.*)$',
+    '^@assets/(.*)$',
     '^@app/(.*)$',
     '^@utils/(.*)$',
     '@/(.*)',
