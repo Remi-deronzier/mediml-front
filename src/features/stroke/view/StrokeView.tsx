@@ -26,7 +26,7 @@ export default function StrokeView() {
   });
 
   return (
-    <AppForm form={form}>
+    <AppForm form={form} fieldsetClassName="space-y-8">
       <StrokeRadioGroup
         description="What is the gender of the patient?"
         groupName="gender"
