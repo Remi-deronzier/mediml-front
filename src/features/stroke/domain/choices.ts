@@ -87,6 +87,16 @@ export const workTypeChoices: WorkTypeChoice[] = [
     title: 'Never worked',
     apiValue: WorkType.Never_worked,
   },
+  {
+    id: 'private',
+    title: 'Private',
+    apiValue: WorkType.Private,
+  },
+  {
+    id: 'self-employed',
+    title: 'Self-employed',
+    apiValue: WorkType['Self-employed'],
+  },
 ];
 
 export const residenceTypeChoices: ResidenceTypeChoice[] = [
