@@ -44,7 +44,7 @@ export default function AppInput<T extends FieldValues>({
     <div>
       <label
         htmlFor={commonName}
-        className="block text-sm font-medium leading-6 text-gray-900"
+        className="text-base font-semibold text-gray-900"
       >
         {label}
       </label>
