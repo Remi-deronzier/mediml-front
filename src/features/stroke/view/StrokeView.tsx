@@ -1,5 +1,6 @@
 import useZodForm from '@hooks/useZodForm';
 
+import Button from '@components/Button';
 import AppForm from '@components/Form';
 import AppInput from '@components/Input';
 
@@ -87,6 +88,15 @@ export default function StrokeView() {
         label="Smoking status"
         values={smokingStatusChoices}
       />
+      <div className="flex justify-end">
+        <Button
+          label="Submit"
+          isLoading={form.formState.isSubmitting}
+          type="submit"
+          // TODO: Implement submit handler.
+          onClick={() => {}}
+        />
+      </div>
     </AppForm>
   );
 }
