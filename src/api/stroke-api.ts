@@ -6,8 +6,7 @@
  * FastAPI
  * OpenAPI spec version: 0.1.0
  */
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
-import * as axios from 'axios';
+import { strokeApiInstance } from './stroke-axios-config';
 
 export type IndexGet200 = { [key: string]: any };
 
@@ -84,24 +83,45 @@ export const Gender = {
   Other: 'Other',
 } as const;
 
+type SecondParameter<T extends (...args: any) => any> = T extends (
+  config: any,
+  args: infer P
+) => any
+  ? P
+  : never;
+
 /**
  * @summary Index
  */
-export const indexGet = <TData = AxiosResponse<IndexGet200>>(
-  options?: AxiosRequestConfig
-): Promise<TData> => {
-  return axios.default.get(`/`, options);
+export const indexGet = (
+  options?: SecondParameter<typeof strokeApiInstance>
+) => {
+  return strokeApiInstance<IndexGet200>({ url: `/`, method: 'get' }, options);
 };
 
 /**
  * @summary Predict
  */
-export const predictPredictPost = <TData = AxiosResponse<StrokePredictionsDto>>(
+export const predictPredictPost = (
   patientsDto: PatientsDto,
-  options?: AxiosRequestConfig
-): Promise<TData> => {
-  return axios.default.post(`/predict`, patientsDto, options);
+  options?: SecondParameter<typeof strokeApiInstance>
+) => {
+  return strokeApiInstance<StrokePredictionsDto>(
+    {
+      url: `/predict`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: patientsDto,
+    },
+    options
+  );
 };
 
-export type IndexGetResult = AxiosResponse<IndexGet200>;
-export type PredictPredictPostResult = AxiosResponse<StrokePredictionsDto>;
+type AwaitedInput<T> = PromiseLike<T> | T;
+
+type Awaited<O> = O extends AwaitedInput<infer T> ? T : never;
+
+export type IndexGetResult = NonNullable<Awaited<ReturnType<typeof indexGet>>>;
+export type PredictPredictPostResult = NonNullable<
+  Awaited<ReturnType<typeof predictPredictPost>>
+>;
