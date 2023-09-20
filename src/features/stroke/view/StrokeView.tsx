@@ -84,6 +84,7 @@ export default function StrokeView() {
           commonName="avgGlucoseLevel"
           placeholder="42.42"
           type="number"
+          step={0.01}
           isMandatory
         />
         <AppInput<StrokeSchemaType>
@@ -91,6 +92,7 @@ export default function StrokeView() {
           commonName="bmi"
           placeholder="42.42"
           type="number"
+          step={0.01}
           isMandatory
         />
         <StrokeRadioGroup
