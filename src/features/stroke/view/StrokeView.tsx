@@ -61,7 +61,7 @@ export default function StrokeView() {
   };
 
   return (
-    <div className="mx-auto max-w-xl py-16">
+    <div className="mx-auto max-w-3xl py-16">
       <Toaster
         title="Error"
         message="We're sorry, something went wrong"
