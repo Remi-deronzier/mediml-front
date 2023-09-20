@@ -22,7 +22,7 @@ export default function StrokeRadioGroup({
       description={description}
       values={values}
       defaultValue={
-        values.find((choice) => choice.isDefault === true) ?? values[0]
+        values.find((choice) => choice.isDefault === true) ?? values[0] // use [] instead of at() because we know that the array is not empty thanks to the check in the RadioGroup component
       }
       groupName={groupName}
       isMandatory

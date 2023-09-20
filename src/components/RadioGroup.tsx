@@ -35,6 +35,11 @@ export default function AppRadioGroup<
   const { register } = useFormContext();
   const maybeErrorMessage = useFormErrorMessage(groupName);
 
+  // If there are no values, we don't render anything
+  if (values.length === 0) {
+    return null;
+  }
+
   return (
     <div>
       <label className="text-base font-semibold text-gray-900">
