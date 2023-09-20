@@ -2,6 +2,7 @@ import { FieldValues, useFormContext } from 'react-hook-form';
 
 import useFormErrorMessage from '@hooks/useFormErrorMessage';
 
+import Asterisk from './Asterisk';
 import AppInputError from './InputError';
 
 export interface RadioProps {
@@ -16,6 +17,7 @@ interface Props<T extends RadioProps, U extends FieldValues> {
   values: T[];
   defaultValue: T;
   groupName: Extract<keyof U, string>;
+  isMandatory?: boolean;
 }
 
 export default function AppRadioGroup<
@@ -28,13 +30,17 @@ export default function AppRadioGroup<
   defaultValue,
   groupName,
   showErrorMessage = true,
+  isMandatory = false,
 }: Props<T, U>) {
   const { register } = useFormContext();
   const maybeErrorMessage = useFormErrorMessage(groupName);
 
   return (
     <div>
-      <label className="text-base font-semibold text-gray-900">{label}</label>
+      <label className="text-base font-semibold text-gray-900">
+        {label}
+        {isMandatory && <Asterisk />}
+      </label>
       {description && <p className="text-sm text-gray-500">{description}</p>}
       <fieldset className="mt-4">
         <legend className="sr-only">{label}</legend>

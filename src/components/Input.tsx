@@ -5,6 +5,7 @@ import { cva } from 'class-variance-authority';
 
 import useFormErrorMessage from '@hooks/useFormErrorMessage';
 
+import Asterisk from './Asterisk';
 import AppInputError from './InputError';
 
 interface Props<T extends FieldValues> extends ComponentProps<'input'> {
@@ -13,6 +14,7 @@ interface Props<T extends FieldValues> extends ComponentProps<'input'> {
   type?: string;
   commonName: Extract<keyof T, string>;
   showErrorMessage?: boolean;
+  isMandatory?: boolean;
 }
 
 const inputStyles = cva(
@@ -34,6 +36,7 @@ export default function AppInput<T extends FieldValues>({
   type,
   commonName,
   showErrorMessage = true,
+  isMandatory = false,
   ...props
 }: Props<T>) {
   const { register } = useFormContext();
@@ -47,6 +50,7 @@ export default function AppInput<T extends FieldValues>({
         className="text-base font-semibold text-gray-900"
       >
         {label}
+        {isMandatory && <Asterisk />}
       </label>
       <div className="mt-2">
         <input
