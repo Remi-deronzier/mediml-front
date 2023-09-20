@@ -1,8 +1,13 @@
+import { useState } from 'react';
+
+import { predictPredictPost } from '@api/stroke-api';
+
 import useZodForm from '@hooks/useZodForm';
 
 import Button from '@components/Button';
 import AppForm from '@components/Form';
 import AppInput from '@components/Input';
+import Toaster from '@components/toaster';
 
 import {
   everMarriedChoices,
@@ -17,6 +22,7 @@ import {
   StrokeFormSchema,
   StrokeSchemaType,
 } from '../domain/stroke-form-validation';
+import { adaptFromStrokeSchemaTypeToPatientsDto } from '../infra/adapters';
 import StrokeRadioGroup from './components/StrokeRadioGroup';
 
 export default function StrokeView() {
@@ -24,9 +30,30 @@ export default function StrokeView() {
     schema: StrokeFormSchema,
     mode: 'all',
   });
+  const [globalError, setGlobalError] = useState(false);
+
+  const handleSubmit = async (data: StrokeSchemaType) => {
+    try {
+      // Reset global error
+      setGlobalError(false);
+
+      console.log(data);
+      const patientsDto = adaptFromStrokeSchemaTypeToPatientsDto(data);
+      const response = await predictPredictPost(patientsDto);
+      console.log(response);
+    } catch (error) {
+      setGlobalError(true);
+    }
+  };
 
   return (
     <div className="mx-auto max-w-xl py-16">
+      <Toaster
+        title="Error"
+        message="We're sorry, something went wrong"
+        type="error"
+        shouldShow={globalError}
+      />
       <h1 className="mb-2 text-4xl font-bold">Stroke prediction</h1>
       <p className="mb-8 text-gray-500">
         Fill this form to predict if a patient is likely to have a stroke.
@@ -34,7 +61,11 @@ export default function StrokeView() {
           &nbsp; All fields are mandatory.
         </strong>
       </p>
-      <AppForm form={form} fieldsetClassName="space-y-8">
+      <AppForm
+        form={form}
+        fieldsetClassName="space-y-8"
+        onSubmit={handleSubmit}
+      >
         <StrokeRadioGroup
           description="What is the gender of the patient?"
           groupName="gender"
@@ -106,8 +137,6 @@ export default function StrokeView() {
             label="Submit"
             isLoading={form.formState.isSubmitting}
             type="submit"
-            // TODO: Implement submit handler.
-            onClick={() => {}}
           />
         </div>
       </AppForm>
