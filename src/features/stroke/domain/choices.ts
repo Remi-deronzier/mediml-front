@@ -47,13 +47,13 @@ export const everMarriedChoices: RadioChoice[] =
 
 export const workTypeChoices: RadioChoice[] = [
   {
-    id: 'children',
-    title: 'Children',
+    id: 'govt-job',
+    title: 'Government job',
     isDefault: true,
   },
   {
-    id: 'govt-job',
-    title: 'Government job',
+    id: 'children',
+    title: 'Children',
   },
   {
     id: 'never-worked',
