@@ -157,7 +157,13 @@
       },
       "WorkType": {
         "type": "string",
-        "enum": ["children", "Govt_jov", "Never_worked"],
+        "enum": [
+          "children",
+          "Govt_jov",
+          "Never_worked",
+          "Private",
+          "Self-employed"
+        ],
         "title": "WorkType"
       }
     }

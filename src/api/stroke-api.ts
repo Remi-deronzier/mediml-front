@@ -16,6 +16,8 @@ export const WorkType = {
   children: 'children',
   Govt_jov: 'Govt_jov',
   Never_worked: 'Never_worked',
+  Private: 'Private',
+  'Self-employed': 'Self-employed',
 } as const;
 
 export type ValidationErrorLocItem = string | number;
