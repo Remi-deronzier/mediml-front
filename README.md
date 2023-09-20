@@ -6,8 +6,8 @@ Final project here: <https://mediml.remax21.fr/>
 
 ## Authors
 
-Ignacio Martinez
-Eduardo Domínguez
-Fabian Windhagen
-Idriss SAADALLAH
-Remi DERONZIER
+- Ignacio Martinez
+- Eduardo Domínguez
+- Fabian Windhagen
+- Idriss SAADALLAH
+- Remi DERONZIER
