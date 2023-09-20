@@ -4,6 +4,8 @@ import {
   PatientsDto,
   ResidenceType,
   SmokingStatus,
+  StrokePrediction,
+  StrokePredictionsDto,
   WorkType,
 } from '@api/stroke-api';
 
@@ -116,3 +118,15 @@ export const adaptFromStrokeSchemaTypeToPatientsDto = (
 ): PatientsDto => ({
   patients: [adaptFromStrokeSchemaTypeToPatientDto(stroke)],
 });
+
+export const adaptFromStrokePredictionsDtoToBoolean = (
+  strokePredictionsDto: StrokePredictionsDto
+): boolean => {
+  // So far we only support one prediction
+  const prediction = strokePredictionsDto.predictions.at(0);
+  if (!prediction) {
+    throw Error('Prediction is not valid');
+  }
+
+  return prediction === StrokePrediction.stroke;
+};

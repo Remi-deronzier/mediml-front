@@ -22,7 +22,12 @@ import {
   StrokeFormSchema,
   StrokeSchemaType,
 } from '../domain/stroke-form-validation';
-import { adaptFromStrokeSchemaTypeToPatientsDto } from '../infra/adapters';
+import {
+  adaptFromStrokePredictionsDtoToBoolean,
+  adaptFromStrokeSchemaTypeToPatientsDto,
+} from '../infra/adapters';
+import PatientWithStrokeModal from './components/PatientWithStrokeModal';
+import PatientWithoutStrokeModal from './components/PatientWithoutStrokeModal';
 import StrokeRadioGroup from './components/StrokeRadioGroup';
 
 export default function StrokeView() {
@@ -31,16 +36,25 @@ export default function StrokeView() {
     mode: 'all',
   });
   const [globalError, setGlobalError] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [hasStroke, setHasStroke] = useState(false);
 
   const handleSubmit = async (data: StrokeSchemaType) => {
     try {
-      // Reset global error
+      // Reset state
       setGlobalError(false);
+      setShowModal(false);
+      setHasStroke(false);
 
-      console.log(data);
       const patientsDto = adaptFromStrokeSchemaTypeToPatientsDto(data);
-      const response = await predictPredictPost(patientsDto);
-      console.log(response);
+      const strokePredictionsDto = await predictPredictPost(patientsDto);
+      setHasStroke(
+        adaptFromStrokePredictionsDtoToBoolean(strokePredictionsDto)
+      );
+      setShowModal(true);
+
+      // Reset form
+      form.reset();
     } catch (error) {
       setGlobalError(true);
     }
@@ -54,6 +68,11 @@ export default function StrokeView() {
         type="error"
         shouldShow={globalError}
       />
+      {hasStroke ? (
+        <PatientWithStrokeModal show={showModal} />
+      ) : (
+        <PatientWithoutStrokeModal show={showModal} />
+      )}
       <h1 className="mb-2 text-4xl font-bold">Stroke prediction</h1>
       <p className="mb-8 text-gray-500">
         Fill this form to predict if a patient is likely to have a stroke.
