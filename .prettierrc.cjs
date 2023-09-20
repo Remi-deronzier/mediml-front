@@ -15,6 +15,7 @@ module.exports = {
     '^react(.*)',
     '<THIRD_PARTY_MODULES>',
     '^@api/(.*)$',
+    '^@features/(.*)$',
     '^@hooks/(.*)$',
     '^@components/(.*)$',
     '^@utils/(.*)$',
