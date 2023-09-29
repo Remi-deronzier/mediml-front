@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { predictPredictPost } from '@api/stroke-api';
+import { predictPredictPost } from '@api/stroke/stroke-api';
 
 import useZodForm from '@hooks/useZodForm';
 

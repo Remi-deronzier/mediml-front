@@ -7,13 +7,17 @@ import {
 
 import {
   GenericChoice,
-  everMarriedChoices,
+  smokingChoices,
   genderChoices,
-  heartDiseaseChoices,
-  hypertensionChoices,
-  residenceTypeChoices,
-  smokingStatusChoices,
-  workTypeChoices,
+  exerciseChoices,
+  skinCancerChoices,
+  otherCancerChoices,
+  depressionChoices,
+  arthritisChoices,
+  diabetesChoices,
+  generalHealthChoices,
+  checkupChoices,
+
 } from './choices';
 
 const NON_FLOAT_ERROR_MESSAGE = 'Please enter a positive number';
@@ -24,20 +28,22 @@ const buildRadioGroupValidation = (choices: GenericChoice[]) =>
     choices.map((choice) => choice.id).includes(choice)
   );
 
-export const StrokeFormSchema = object({
+export const CardiovascularFormSchema = object({
   gender: buildRadioGroupValidation(genderChoices),
   age: string()
     .nonempty(FIELD_REQUIRED_ERROR_MESSAGE)
     .regex(regexForOnlyPositiveInteger, {
       message: 'Please enter a positive integer',
-    }),//Add refine with passing the value into a bin
-  exercise: buildRadioGroupValidation(hypertensionChoices),
-  skinCancer: buildRadioGroupValidation(heartDiseaseChoices),
-  otherCancer: buildRadioGroupValidation(everMarriedChoices),
-  depression: buildRadioGroupValidation(workTypeChoices),
-  diabetes: buildRadioGroupValidation(residenceTypeChoices),
-  arthritis: buildRadioGroupValidation(residenceTypeChoices),
-  smokingHistory: buildRadioGroupValidation(residenceTypeChoices),
+    }),
+  generalHealth:buildRadioGroupValidation(generalHealthChoices),
+  checkup:buildRadioGroupValidation(checkupChoices),
+  exercise: buildRadioGroupValidation(exerciseChoices),
+  skinCancer: buildRadioGroupValidation(skinCancerChoices),
+  otherCancer: buildRadioGroupValidation(otherCancerChoices),
+  depression: buildRadioGroupValidation(depressionChoices),
+  diabetes: buildRadioGroupValidation(diabetesChoices),
+  arthritis: buildRadioGroupValidation(arthritisChoices),
+  smoking: buildRadioGroupValidation(smokingChoices),
   alcoholConsumption: string()
     .nonempty(FIELD_REQUIRED_ERROR_MESSAGE)
     .regex(regexForOnlyPositiveFloat, {
@@ -70,4 +76,4 @@ export const StrokeFormSchema = object({
     }),
 });
 
-export type StrokeSchemaType = z.infer<typeof StrokeFormSchema>;
+export type CardiovascularSchemaType = z.infer<typeof CardiovascularFormSchema>;

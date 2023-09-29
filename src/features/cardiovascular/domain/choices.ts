@@ -1,9 +1,8 @@
 import {
   Gender,
-  ResidenceType,
-  SmokingStatus,
-  WorkType,
-} from '@api/stroke-api';
+  Checkup,
+  GeneralHealth,
+} from '@api/cardiovascular/cardiovascular-api';
 
 import { RadioProps } from '../../../components/RadioGroup';
 
@@ -14,14 +13,11 @@ export interface GenderChoice extends GenericChoice {
   apiValue: Gender;
 }
 export interface YesNoChoice extends GenericChoice {}
-export interface WorkTypeChoice extends GenericChoice {
-  apiValue: WorkType;
+export interface GeneralHealtChoice extends GenericChoice {
+  apiValue: GeneralHealth;
 }
-export interface ResidenceTypeChoice extends GenericChoice {
-  apiValue: ResidenceType;
-}
-export interface SmokingStatusChoice extends GenericChoice {
-  apiValue: SmokingStatus;
+export interface CheckupChoice extends GenericChoice {
+  apiValue: Checkup;
 }
 
 export const genderChoices: GenderChoice[] = [
@@ -35,15 +31,11 @@ export const genderChoices: GenderChoice[] = [
     id: 'female',
     title: 'Female',
     apiValue: Gender.Female,
-  },
-  {
-    id: 'other',
-    title: 'Other',
-    apiValue: Gender.Other,
-  },
+  }
 ];
 
-export const YES_ID = 'yes';
+export const YES_ID = 'Yes';
+export const NO_ID = 'NO';
 
 const yesNoChoices: YesNoChoice[] = [
   {
@@ -52,7 +44,7 @@ const yesNoChoices: YesNoChoice[] = [
     isDefault: true,
   },
   {
-    id: 'no',
+    id: NO_ID,
     title: 'No',
   },
 ];
@@ -63,76 +55,84 @@ const buildYesNoRadioChoices = (groupName: string) =>
     id: `${choice.id}-${groupName}`,
   }));
 
-export const heartDiseaseChoices: YesNoChoice[] =
-  buildYesNoRadioChoices('heart-disease');
-export const hypertensionChoices: YesNoChoice[] =
-  buildYesNoRadioChoices('hypertension');
-export const everMarriedChoices: YesNoChoice[] =
-  buildYesNoRadioChoices('ever-married');
+export const exerciseChoices: YesNoChoice[] =
+  buildYesNoRadioChoices('exercise');
+export const skinCancerChoices: YesNoChoice[] =
+  buildYesNoRadioChoices('skin-cancer');
+export const otherCancerChoices: YesNoChoice[] =
+  buildYesNoRadioChoices('other-cancer');
+export const depressionChoices: YesNoChoice[] =
+  buildYesNoRadioChoices('depression');
+export const arthritisChoices: YesNoChoice[] =
+  buildYesNoRadioChoices('arthritis');
+export const diabetesChoices: YesNoChoice[] =
+  buildYesNoRadioChoices('diabetes');
+export const smokingChoices: YesNoChoice[] =
+  buildYesNoRadioChoices('smoking');
 
-export const workTypeChoices: WorkTypeChoice[] = [
+
+export const checkupChoices: CheckupChoice[] = [
   {
-    id: 'govt-job',
-    title: 'Government job',
+    id: 'never',
+    title: 'Never',
     isDefault: true,
-    apiValue: WorkType.Govt_jov,
+    apiValue: Checkup.Never
   },
   {
-    id: 'children',
-    title: 'Children',
-    apiValue: WorkType.children,
+    id: 'Within_the_past_5_years',
+    title: 'Within the past 5 years',
+    isDefault: false,
+    apiValue: Checkup.Within_the_past_5_years
   },
   {
-    id: 'never-worked',
-    title: 'Never worked',
-    apiValue: WorkType.Never_worked,
+    id: 'Within_the_past_2_years',
+    title: 'Within the past 2 years',
+    isDefault: false,
+    apiValue: Checkup.Within_the_past_2_years
   },
   {
-    id: 'private',
-    title: 'Private',
-    apiValue: WorkType.Private,
+    id: 'Within_the_past_year',
+    title: 'Within the past year',
+    isDefault: false,
+    apiValue: Checkup.Within_the_past_year
   },
   {
-    id: 'self-employed',
-    title: 'Self-employed',
-    apiValue: WorkType['Self-employed'],
+    id: '5_or_more_years_ago',
+    title: '5 or more years ago',
+    isDefault: false,
+    apiValue: Checkup['5_or_more_years_ago']
   },
 ];
 
-export const residenceTypeChoices: ResidenceTypeChoice[] = [
+export const generalHealthChoices: GeneralHealtChoice[] = [
   {
-    id: 'rural',
-    title: 'Rural',
+    id: 'poor',
+    title: 'Poor',
     isDefault: true,
-    apiValue: ResidenceType.Rural,
+    apiValue: GeneralHealth.Poor
   },
   {
-    id: 'urban',
-    title: 'Urban',
-    apiValue: ResidenceType.Urban,
-  },
-];
-
-export const smokingStatusChoices: SmokingStatusChoice[] = [
-  {
-    id: 'formerly-smoked',
-    title: 'Formerly smoked',
-    isDefault: true,
-    apiValue: SmokingStatus.formerly_smoked,
+    id: 'fair',
+    title: 'Fair',
+    isDefault: false,
+    apiValue: GeneralHealth.Fair
   },
   {
-    id: 'never-smoked',
-    title: 'Never smoked',
-    apiValue: SmokingStatus.never_smoked,
+    id: 'good',
+    title: 'Good',
+    isDefault: false,
+    apiValue: GeneralHealth.Good
   },
   {
-    id: 'smokes',
-    title: 'Smokes',
-    apiValue: SmokingStatus.smokes,
+    id: 'very_good',
+    title: 'Very good',
+    isDefault: false,
+    apiValue: GeneralHealth.Very_Good
   },
   {
-    id: 'unknown',
-    title: 'Unknown',
-    apiValue: SmokingStatus.Unknown,
+    id: 'excellent',
+    title: 'Excellent',
+    isDefault: false,
+    apiValue: GeneralHealth.Excellent
   },
-];
+]
