@@ -110,7 +110,7 @@ export const predictPredictPost = (
 ) => {
   return strokeApiInstance<StrokePredictionsDto>(
     {
-      url: `/predict`,
+      url: `/predict/stroke`,
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       data: patientsDto,

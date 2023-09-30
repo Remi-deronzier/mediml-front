@@ -3,7 +3,7 @@ import {
   ResidenceType,
   SmokingStatus,
   WorkType,
-} from '@api/stroke-api';
+} from '@api/stroke/stroke-api';
 
 import { RadioProps } from '../../../components/RadioGroup';
 

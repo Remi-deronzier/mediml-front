@@ -28,6 +28,8 @@ import PatientWithoutCardiovascularModal from './components/PatientWithoutCardio
 import CardiovascularRadioGroup from './components/CardiovascularRadioGroup';
 import { adaptFromCardiovascularPredictionsDtoToBoolean, adaptFromCardiovascularSchemaTypeToCardiovacularPatientsDto } from '../infra/adapters';
 import { predictPredictPost } from '@api/cardiovascular/cardiovascular-api';
+import Header from '@app/Header';
+import Footer from '@app/Footer';
 
 export default function CardiovascularView() {
   const form = useZodForm({
@@ -65,6 +67,9 @@ export default function CardiovascularView() {
 
 
   return (
+    <>
+    <Header/>
+
     <div className="mx-auto max-w-3xl py-16">
       <Toaster
         title="Error"
@@ -118,7 +123,7 @@ export default function CardiovascularView() {
         <CardiovascularRadioGroup
           description="Does the patient have exercise frequently?"
           groupName="exercise"
-          label="exercise"
+          label="Exercise"
           values={exerciseChoices}
         />
         <CardiovascularRadioGroup
@@ -216,5 +221,7 @@ export default function CardiovascularView() {
         </div>
       </AppForm>
     </div>
+    <Footer />
+    </>
   );
 }
