@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { predictPredictPost } from '@api/stroke-api';
+import { predictPredictPost } from '@api/stroke/stroke-api';
 
 import useZodForm from '@hooks/useZodForm';
 
@@ -29,6 +29,8 @@ import {
 import PatientWithStrokeModal from './components/PatientWithStrokeModal';
 import PatientWithoutStrokeModal from './components/PatientWithoutStrokeModal';
 import StrokeRadioGroup from './components/StrokeRadioGroup';
+import Header from '@app/Header';
+import Footer from '@app/Footer';
 
 export default function StrokeView() {
   const form = useZodForm({
@@ -61,6 +63,8 @@ export default function StrokeView() {
   };
 
   return (
+    <>
+<Header />
     <div className="mx-auto max-w-3xl py-16">
       <Toaster
         title="Error"
@@ -160,5 +164,7 @@ export default function StrokeView() {
         </div>
       </AppForm>
     </div>
+    <Footer />
+    </>
   );
 }

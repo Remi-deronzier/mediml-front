@@ -1,0 +1,194 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "FastAPI", "version": "0.1.0" },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Index",
+        "operationId": "index__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object", "title": "Response Index  Get" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/predict/cardiovascular": {
+      "post": {
+        "summary": "Cardiovascular Predict",
+        "operationId": "predict_predict_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CardiovascularPatientsDto" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CardiovascularPredictionsDto"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Gender": {
+        "type": "string",
+        "enum": ["Male", "Female"],
+        "title": "Gender"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "CardiovascularPatientDto": {
+        "properties": {
+          "gender": { "$ref": "#/components/schemas/Gender" },
+          "general_health": { "$ref": "#/components/schemas/GeneralHealth" },
+          "checkup": { "$ref": "#/components/schemas/Checkup" },
+          "age": { "type": "string", "title": "Age" },
+          "exercise": { "type": "boolean", "title": "Exercise" },
+          "skin_cancer": { "type": "boolean", "title": "Skin cancer" },
+          "other_cancer": { "type": "boolean", "title": "Other cancer" },
+          "depression": { "type": "boolean", "title": "Depression" },
+          "diabetes": { "type": "boolean", "title": "Diabetes" },
+          "arthritis": { "type": "boolean", "title": "Arthritis" },
+          "smoking": { "type": "boolean", "title": "Smoking History" },
+          "fruit_consumption": {
+            "type": "number",
+            "title": "Fruit consumption"
+          },
+          "alcohol_consumption": {
+            "type": "number",
+            "title": "Alcohol consumption"
+          },
+          "green_vegetable_consumption": {
+            "type": "number",
+            "title": "Green vegetables consumption"
+          },
+          "fried_potato_consumption": {
+            "type": "number",
+            "title": "Fried potato consumption"
+          },
+          "height": {
+            "type": "number",
+            "title": "Height"
+          },
+          "weight": {
+            "type": "number",
+            "title": "Weight"
+          },
+          "bmi": {
+            "type": "number",
+            "title": "BMI"
+          }
+        },
+        "type": "object",
+        "required": [
+          "gender",
+          "age",
+          "general_health",
+          "checkup",
+          "exercise",
+          "skin_cancer",
+          "other_cancer",
+          "depression",
+          "bmi",
+          "diabetes",
+          "arthritis",
+          "smoking",
+          "fruit_consumption",
+          "alcohol_consumption",
+          "green_vegetable_consumption",
+          "fried_potato_consumption",
+          "height",
+          "weight"
+        ],
+        "title": "CardiovascularPatientDto"
+      },
+      "CardiovascularPatientsDto": {
+        "properties": {
+          "patients": {
+            "items": { "$ref": "#/components/schemas/CardiovascularPatientDto" },
+            "type": "array",
+            "title": "Patients"
+          }
+        },
+        "type": "object",
+        "required": ["patients"],
+        "title": "CardiovascularPatientsDto"
+      },
+      "GeneralHealth": {
+        "type": "string",
+        "enum": ["Poor", "Fair","Good","Very Good","Excellent"],
+        "title": "GeneralHealth"
+      },
+      "Checkup": {
+        "type": "string",
+        "enum": ["Never","5 or more years ago","Within the past 5 years","Within the past 2 years","Within the past year"],
+        "title": "Checkup"
+      },
+      "CardiovascularPredictionDto": {
+        "type": "string",
+        "enum": ["cardiovascular", "no_cardiovascular"],
+        "title": "CardiovascularPredictionDto"
+      },
+      "CardiovascularPredictionsDto": {
+        "properties": {
+          "predictions": {
+            "items": { "$ref": "#/components/schemas/CardiovascularPredictionDto" },
+            "type": "array",
+            "title": "Predictions"
+          }
+        },
+        "type": "object",
+        "required": ["predictions"],
+        "title": "CardiovascularPredictionsDto"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

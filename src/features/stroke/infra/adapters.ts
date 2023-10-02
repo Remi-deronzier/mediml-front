@@ -7,7 +7,7 @@ import {
   StrokePrediction,
   StrokePredictionsDto,
   WorkType,
-} from '@api/stroke-api';
+} from '@api/stroke/stroke-api';
 
 import {
   YES_ID,
